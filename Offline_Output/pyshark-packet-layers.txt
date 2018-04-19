@@ -1,0 +1,133 @@
+>>> fcap[34].layers
+[<ETH Layer>, <IP Layer>, <TCP Layer>, <ENIP Layer>, <CIP Layer>, <CIPCM Layer>]
+>>> for thing in fcap[34].layers:
+...     print("{} is of type {}".format(thing, type(thing)))
+... 
+Layer ETH:
+	Destination: 00:08:a1:60:70:59
+	.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+	Address: 00:08:a1:60:70:59
+	.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+	Source: 00:00:bc:21:ca:c2
+	.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+	Address: 00:00:bc:21:ca:c2
+	.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+ is of type <class 'pyshark.packet.layer.Layer'>
+Layer IP:
+	Source GeoIP: Unknown
+	..0. .... = More fragments: Not set
+	Time to live: 64
+	0100 .... = Version: 4
+	.0.. .... = Don't fragment: Not set
+	Flags: 0x00
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+	Identification: 0x6cc7 (27847)
+	Header checksum: 0x8bc1 [validation disabled]
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	.... 0101 = Header Length: 20 bytes (5)
+	Destination: 192.168.0.46
+	0000 00.. = Differentiated Services Codepoint: Default (0)
+	Fragment offset: 0
+	0... .... = Reserved bit: Not set
+	Total Length: 140
+	Source: 192.168.0.101
+	Header checksum status: Unverified
+	Protocol: TCP (6)
+	Destination GeoIP: Unknown
+ is of type <class 'pyshark.packet.layer.Layer'>
+Layer TCP:
+	.... ..0. .... = Urgent: Not set
+	Acknowledgment number: 545    (relative ack number)
+	Bytes in flight: 100
+	Stream index: 1
+	Checksum Status: Unverified
+	Sequence number: 1116    (relative sequence number)
+	iRTT: 0.001162000 seconds
+	Bytes sent since last PSH flag: 100
+	TCP Segment Len: 100
+	000. .... .... = Reserved: Not set
+	This is an ACK to the segment in frame: 34
+	SEQ/ACK analysis
+	The RTT to ACK the segment was: 0.006744000 seconds
+	Header Length: 20 bytes
+	Destination Port: 3286
+	.... .... 1... = Push: Set
+	Calculated window size: 4096
+	...0 .... .... = Nonce: Not set
+	.... ...1 .... = Acknowledgment: Set
+	PDU Size: 100
+	TCP Flags: \xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7AP\xc2\xb7\xc2\xb7\xc2\xb7
+	.... .... ...0 = Fin: Not set
+	Window size scaling factor: -2 (no window scaling used)
+	Window size value: 4096
+	Flags: 0x018 (PSH, ACK)
+	.... .0.. .... = ECN-Echo: Not set
+	Next sequence number: 1216    (relative sequence number)
+	Source Port: 44818
+	Checksum: 0x1695 [unverified]
+	Urgent pointer: 0
+	.... .... ..0. = Syn: Not set
+	.... 0... .... = Congestion Window Reduced (CWR): Not set
+	.... .... .0.. = Reset: Not set
+ is of type <class 'pyshark.packet.layer.Layer'>
+Layer ENIP:
+	Encapsulation Header
+	Timeout: 0
+	Length: 76
+	Session Handle: 0x0a021100
+	Time: 0.006744000 seconds
+	Request In: 34
+	Sender Context: 0000000000000000
+	Command: Send RR Data (0x006f)
+	Length: 0
+	Interface Handle: CIP (0x00000000)
+	Status: Success (0x00000000)
+	Type ID: Null Address Item (0x0000)
+	Options: 0x00000000
+	Item Count: 2
+	Command Specific Data
+	Length: 60
+	Type ID: Unconnected Data Item (0x00b2)
+ is of type <class 'pyshark.packet.layer.Layer'>
+Layer CIP:
+	Status: Success: 
+	Path Segment: 0x20 (8-Bit Class Segment)
+	001. .... = Path Segment Type: Logical Segment (1)
+	Instance: 0x01
+	1... .... = Request/Response: Response (0x1)
+	Request Path Size: 2 (words)
+	Additional Status Size: 0 (words)
+	Service: Unknown Service (0x4c) (Response)
+	General Status: Success (0x00)
+	.... ..00 = Logical Segment Format: 8-bit Logical Segment (0)
+	Class: Connection Manager (0x06)
+	...0 00.. = Logical Segment Type: Class ID (0)
+	.100 1100 = Service: Unknown (0x4c)
+	Request Path: Connection Manager, Instance: 0x01
+	8-Bit Class Segment
+	8-Bit Instance Segment
+	Path Segment: 0x24 (8-Bit Instance Segment)
+	001. .... = Path Segment Type: Logical Segment (1)
+	.... ..00 = Logical Segment Format: 8-bit Logical Segment (0)
+	...0 01.. = Logical Segment Type: Instance ID (1)
+ is of type <class 'pyshark.packet.layer.Layer'>
+Layer CIPCM:
+	Request Path: Class: 0x6C, Instance: 0x03F3
+	Path Segment: 0x20 (8-Bit Class Segment)
+	Data: 0000c400000000000000c3000400000041423a313736395f...
+	Instance: 0x03f3
+	Request Path Size: 3 (words)
+	001. .... = Path Segment Type: Logical Segment (1)
+	.... ..00 = Logical Segment Format: 8-bit Logical Segment (0)
+	Class: Unknown (0x6c)
+	...0 00.. = Logical Segment Type: Class ID (0)
+	(Service: Unconnected Send (Response))
+	8-Bit Class Segment
+	16-Bit Instance Segment
+	Command Specific Data
+	Path Segment: 0x25 (16-Bit Instance Segment)
+	001. .... = Path Segment Type: Logical Segment (1)
+	.... ..01 = Logical Segment Format: 16-bit Logical Segment (1)
+	...0 01.. = Logical Segment Type: Instance ID (1)
+ is of type <class 'pyshark.packet.layer.Layer'>

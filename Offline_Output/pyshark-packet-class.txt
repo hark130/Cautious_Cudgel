@@ -1,0 +1,6 @@
+>>> dir(fcap[34])
+['__class__', '__contains__', '__delattr__', '__dict__', '__dir__', '__doc__', '__format__', '__getattr__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_packet_string', 'captured_length', 'cip', 'cipcm', 'enip', 'eth', 'frame_info', 'get_multiple_layers', 'highest_layer', 'interface_captured', 'ip', 'layers', 'length', 'number', 'pretty_print', 'sniff_time', 'sniff_timestamp', 'tcp', 'transport_layer']
+>>> type(fcap[34])
+<class 'pyshark.packet.packet.Packet'>
+>>> dir(fcap[34])
+['__class__', '__contains__', '__delattr__', '__dict__', '__dir__', '__doc__', '__format__', '__getattr__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_packet_string', 'captured_length', 'cip', 'cipcm', 'enip', 'eth', 'frame_info', 'get_multiple_layers', 'highest_layer', 'interface_captured', 'ip', 'layers', 'length', 'number', 'pretty_print', 'sniff_time', 'sniff_timestamp', 'tcp', 'transport_layer']

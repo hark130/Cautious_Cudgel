@@ -1,0 +1,1660 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000065
+ENIP Session Handle:  0x00000000
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000065
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x0000006f
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.46
+Destination IP:  192.168.0.101
+Source Port:       3286
+Destination Port:  44818
+
+
+
+
+
+ENIP Command:         0x00000070
+ENIP Session Handle:  0x0a021100
+Source IP:       192.168.0.101
+Destination IP:  192.168.0.46
+Source Port:       44818
+Destination Port:  3286
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
