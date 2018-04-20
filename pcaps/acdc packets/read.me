@@ -1,0 +1,41 @@
+UNCLASSIFIED
+
+POC:  Scott M Thompson
+CACI, INC (90 COS/CYM)
+210-977-6398
+scott.thompson@caci.com
+
+Packets were captured between the remote Human Machine Interface (HMI) at 192.168.1.230 and the Allen-Bradley L33ER Programmable Logic Controller (PLC) at 192.168.1.200.
+
+<><>
+
+Important Packets are as follows:
+
+Packet#      Operation
+-------      ---------
+Vacuum Pump Inlet Valve (User must set to "Manual Control" to fully open the valve @ 100%)
+7829         Set Vacuum Pump Valve to Automatic Control
+9136         Set Vacuum Pump Valve to Manual Control
+10781        Set Vacuum Pump Valve to 100% Open
+12348        Set Vacuum Pump Valve to 50% Open
+13978        Set Vacuum Pump Valve to 0% Open
+
+Knife Valve 200 (User must UNLOCK and acknowledge the UNLOCK before the valve may be opened)
+20933        Set Knife Valve 200 to UNLOCK
+21558        Operator Acknowledges UNLOCK
+22427        Open Knife Valve 200
+24840        Close Knife Valve 200
+26086        Open Knife Valve 200
+27615        Set Knife Valve 200 to LOCK
+
+Knife Valve 201
+28763	     Set Knife Valve 201 to UNLOCK
+29554        Operator Acknowledges UNLOCK
+30396        Open Knife Valve 201
+31160        Close Knife Valve 201
+32713        Lock Knife Valve 201
+
+<><>
+
+In addition, the key WRITE operations above have been segregated into individual PCAP file to facilitate reuse of those specific packets.  Those PCAP files are included on this DVD.
+
