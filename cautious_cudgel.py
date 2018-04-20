@@ -186,6 +186,7 @@ def get_cip_srn(packet):
 if __name__ == "__main__":
     ### LOCAL VARIABLES ###
     stdscr = curse_a_win()  # Initialize a curses window
+    filename = ""  # Filename to pyshark.FileCapture from
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
     tmpSRN = ""  # Temp variable to hold the CIP service request number
     tmpCSC = ""  # Temp variable to hold the CIP sequence count
@@ -227,8 +228,19 @@ if __name__ == "__main__":
         # filename = "pcaps/talabor1_1.pcap"
         filename = os.path.join(os.getcwd(), "pcaps", 
                                 "01-Lab-Demo-20180417.pcapng")
+        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
+        #                         "acdc_main.pcapng")
+        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
+        #                         "1.1_set_auto_vacuum_valve.pcap")
+        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
+        #                         "1.2_set_manual_vacuum_valve.pcap")
+        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
+        #                         "1.3_set_valve_open_100_percent.pcap")
+        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
+        #                         "1.4_set_valve_open_0_percent.pcap")
 
         if not os.path.isfile(filename):
+            break_a_curse(stdscr)
             raise IOError("Unable to open pcap")
 
         fcapture = pyshark.FileCapture(filename)
@@ -274,7 +286,15 @@ if __name__ == "__main__":
                     # 3.1.1.3. "CIP sequence count"
                     stdscr.addnstr(8, 2, "Sequence Counter - " + curr4eCSC, printWid)
 
-            # 3.1.N. Print number of packets parsed
+            # 3.1.3. Print number of packets parsed
+            # 3.1.3.1. Print the file for demonstration purposes
+            if filename.__len__() > 0:
+                if filename.__len__() + "Parsing file: ".__len__() > printWid:
+                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " 
+                                   + os.path.basename(filename), printWid)
+                else:
+                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " + filename, printWid)
+            # 3.1.3.2. Print the number of packets processed
             stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
 
             # 3.2. Refresh the window
