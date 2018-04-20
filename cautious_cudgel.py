@@ -123,10 +123,46 @@ def get_enip_session_handle(packet):
 ##############################################################################
 
 
+##############################################################################
+######################### CIP HELPER FUNCTIONS START #########################
+##############################################################################
+
+
+def get_cip_srn(packet):
+    '''
+    PURPOSE - Extract the service request number from a CIP header
+    INPUT - pyshark Packet object
+    OUTPUT
+        On success, a string object containing the service request number
+        On failure, an empty string object
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = ""  # Will contain the ENIP session if it exists
+
+    ### INPUT VALIDATION ###
+    if not isinstance(packet, pyshark.packet.packet.Packet):
+        raise ValueError("Invalid packet type")
+
+    ### EXRACT DATA ###
+    try:
+        retVal = packet.cip.service
+    except AttributeError:
+        pass
+
+    ### DONE ###
+    return retVal
+
+
+##############################################################################
+######################### CIP HELPER FUNCTIONS STOP ##########################
+##############################################################################
+
+
 if __name__ == "__main__":
     ### LOCAL VARIABLES ###
     stdscr = curse_a_win()  # Initialize a curses window
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
+    tmpSRN = ""  # Temp variable to hold the CIP service request number
     maxWid = 0  # Maximum width of the curses window
     maxLen = 0  # Maximum length of the curses window
     printWid = 0  # Maximum printable area of the curses window
@@ -177,17 +213,19 @@ if __name__ == "__main__":
             # 2. PARSE PACKETS
             # 2.0. Keep track of packet number
             numPackets += 1
-            # 2.1. Get the "session handle"
-            tmpSesHndl = get_enip_session_handle(packet)
-            # 2.2. Get the "service request number"
+            # 2.1. Get the "service request number"
+            tmpSRN = get_cip_srn(packet)
+            # 2.2. Get the "session handle"
+            tmpSesHndl = get_enip_session_handle(packet)            
             # 2.3. Get the "CIP sequence count"
 
             # 3. PRINT DATA
             # 3.1. Update the window
-            # 3.1.1. "session handle"
-            if tmpSesHndl.__len__() > 0:
-                stdscr.addnstr(2, 2, tmpSesHndl, printWid)
-
+            if tmpSRN.__len__() > 0 and tmpSesHndl.__len__() > 0:
+                # 3.1.1. "service request number"
+                stdscr.addnstr(2, 2, tmpSRN, printWid)
+                # 3.1.2. "session handle"
+                stdscr.addnstr(3, 2, tmpSesHndl, printWid)
 
             # 3.1.N. Print number of packets parsed
             stdscr.addnstr(printLen, 2, "Parsed " + str(numPackets) + " packets", printWid)
