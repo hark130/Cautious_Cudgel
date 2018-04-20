@@ -6,10 +6,7 @@ Utilizing pyshark to inspect traffic
 
 ## SETUP
 
-* ```apt install tshark```
-* ```pip3 install pyshark==0.3.6.2```
-* ```chmod u+s /usr/bin/dumpcap```
-* ```python cautious_cudgel.py```
+See the [Install instructions](https://github.com/hark130/Cautious_Cudgel/wiki/Install_Instructions) on the [Cautious Cudgel wiki](https://github.com/hark130/Cautious_Cudgel/wiki)
 
 ## FACTS
 
