@@ -3,6 +3,11 @@ import os
 import pyshark
 
 
+##############################################################################
+####################### CURSES HELPER FUNCTIONS START ########################
+##############################################################################
+
+
 def curse_a_win():
     '''
     PURPOSE - Initialize a curses window
@@ -53,12 +58,95 @@ def break_a_curse(cWin):
     return
 
 
+def get_curse_dimensions(cWin):
+    '''
+    PURPOSE - Get the dimensions of a curses window object
+    INPUT
+        cWin - A curses window object
+    OUTPUT
+        On success, a (width, length) tuple
+        On failure, None (or Exception)
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = None  # Make this into a tuple if everything succeeds
+    winWid = 0  # Curses window max width
+    winLen = 0  # Curses window max length
+
+    ### INPUT VALIDATION ###
+    if not cWin:
+        raise TypeError("Invalid cWin")
+
+    ### GET DIMENSIONS
+    winLen, winWid = cWin.getmaxyx()
+
+    ### DONE ###
+    return (winWid, winLen)
+
+
+##############################################################################
+####################### CURSES HELPER FUNCTIONS STOP #########################
+##############################################################################
+
+
+##############################################################################
+######################## ENIP HELPER FUNCTIONS START #########################
+##############################################################################
+
+
+def get_enip_session_handle(packet):
+    '''
+    PURPOSE - Extract the session handle from an ENIP header
+    INPUT - pyshark Packet object
+    OUTPUT
+        On success, a string object containing the session handle
+        On failure, an empty string object
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = ""  # Will contain the ENIP session if it exists
+
+    ### INPUT VALIDATION ###
+    if not isinstance(packet, pyshark.packet.packet.Packet):
+        raise ValueError("Invalid packet type")
+
+    ### EXRACT DATA ###
+    try:
+        retVal = packet.enip.session
+    except AttributeError:
+        pass
+
+    ### DONE ###
+    return retVal
+
+
+##############################################################################
+######################## ENIP HELPER FUNCTIONS STOP ##########################
+##############################################################################
+
+
 if __name__ == "__main__":
     ### LOCAL VARIABLES ###
     stdscr = curse_a_win()  # Initialize a curses window
+    tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
+    maxWid = 0  # Maximum width of the curses window
+    maxLen = 0  # Maximum length of the curses window
+    printWid = 0  # Maximum printable area of the curses window
+    printLen = 0  # Maximum printable area of the curses window
+    numPackets = 0  # Keep track of the number of packets
 
     ### WORK ###
     if stdscr:
+        # 0. GET CURSES WINDOW DIMENSIONS
+        maxWid, maxLen = get_curse_dimensions(stdscr)
+
+        if maxWid < 1 or maxLen < 1:
+            raise RuntimeError("get_curse_dimensions appears to have failed")
+        ######################### DEFINE THESE LATER #########################
+        elif maxWid < 20 or maxLen < 13:
+            raise RuntimeError("Terminal window is too small")
+        else:
+            printWid = maxWid - 4
+            printLen = maxLen - 4
+
         ######################################################################
         ######################################################################
         ######################################################################
@@ -87,11 +175,29 @@ if __name__ == "__main__":
         ######################################################################
 
             # 2. PARSE PACKETS
-            pass
+            # 2.0. Keep track of packet number
+            numPackets += 1
+            # 2.1. Get the "session handle"
+            tmpSesHndl = get_enip_session_handle(packet)
+            # 2.2. Get the "service request number"
+            # 2.3. Get the "CIP sequence count"
 
-        # Time to end?
-        while -1 == stdscr.getch():
-            continue
+            # 3. PRINT DATA
+            # 3.1. Update the window
+            # 3.1.1. "session handle"
+            if tmpSesHndl.__len__() > 0:
+                stdscr.addnstr(2, 2, tmpSesHndl, printWid)
+
+
+            # 3.1.N. Print number of packets parsed
+            stdscr.addnstr(printLen, 2, "Parsed " + str(numPackets) + " packets", printWid)
+
+            # 3.2. Refresh the window
+            stdscr.refresh()
+
+            # N. Stop parsing on user input
+            if -1 != stdscr.getch():
+                break
 
         ### BREAK THE CURSE ###
         break_a_curse(stdscr)
