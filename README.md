@@ -1,7 +1,8 @@
 # Cautious_Cudgel
-Utilizing pyshark to inspect traffic
+Utilizing pyshark to inspect Allen-Bradley Logix 5000 Controller Common Industrial Protocol (CIP) traffic.
 
 ## REFERENCES
+* [Source controlled documents](https://github.com/hark130/Cautious_Cudgel/tree/master/Research_Files)
 * [Wirehsark Display Filter Reference: Common Industrial Protocol](https://www.wireshark.org/docs/dfref/c/cip.html)
 
 ## SETUP
