@@ -118,6 +118,31 @@ def get_enip_session_handle(packet):
     return retVal
 
 
+def get_enip_CSC(packet):
+    '''
+    PURPOSE - Extract the CIP sequence count from an ENIP header
+    INPUT - pyshark Packet object
+    OUTPUT
+        On success, a string object containing the CIP sequence count
+        On failure, an empty string object
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = ""  # Will contain the ENIP sequence count if it exists
+
+    ### INPUT VALIDATION ###
+    if not isinstance(packet, pyshark.packet.packet.Packet):
+        raise ValueError("Invalid packet type")
+
+    ### EXRACT DATA ###
+    try:
+        retVal = packet.enip.cpf_cdi_seqcnt
+    except AttributeError:
+        pass
+
+    ### DONE ###
+    return retVal
+
+
 ##############################################################################
 ######################## ENIP HELPER FUNCTIONS STOP ##########################
 ##############################################################################
@@ -137,7 +162,7 @@ def get_cip_srn(packet):
         On failure, an empty string object
     '''
     ### LOCAL VARIABLES ###
-    retVal = ""  # Will contain the ENIP session if it exists
+    retVal = ""  # Will contain the CIP SRN if it exists
 
     ### INPUT VALIDATION ###
     if not isinstance(packet, pyshark.packet.packet.Packet):
@@ -163,6 +188,9 @@ if __name__ == "__main__":
     stdscr = curse_a_win()  # Initialize a curses window
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
     tmpSRN = ""  # Temp variable to hold the CIP service request number
+    tmpCSC = ""  # Temp variable to hold the CIP sequence count
+    curr4dCSC = ""  # Current 0x4d CIP sequence count
+    curr4eCSC = ""  # Current 0x4d CIP sequence count
     maxWid = 0  # Maximum width of the curses window
     maxLen = 0  # Maximum length of the curses window
     printWid = 0  # Maximum printable area of the curses window
@@ -218,17 +246,36 @@ if __name__ == "__main__":
             # 2.2. Get the "session handle"
             tmpSesHndl = get_enip_session_handle(packet)            
             # 2.3. Get the "CIP sequence count"
+            tmpCSC = get_enip_CSC(packet)
 
             # 3. PRINT DATA
             # 3.1. Update the window
-            if tmpSRN.__len__() > 0 and tmpSesHndl.__len__() > 0:
-                # 3.1.1. "service request number"
-                stdscr.addnstr(2, 2, tmpSRN, printWid)
-                # 3.1.2. "session handle"
-                stdscr.addnstr(3, 2, tmpSesHndl, printWid)
+            if tmpSRN.__len__() > 0 \
+            and tmpSesHndl.__len__() > 0 \
+            and tmpCSC.__len__() > 0:
+                # 3.1.1. Write Tag Service (0x4d)
+                if tmpSRN.endswith("4d") and curr4dCSC != tmpCSC:
+                    # 3.1.1.0. Update the CIP sequence count
+                    curr4dCSC = tmpCSC
+                    # 3.1.1.1. "service request number"
+                    stdscr.addnstr(2, 2, tmpSRN, printWid)
+                    # 3.1.1.2. "session handle"
+                    stdscr.addnstr(3, 2, "Session Handle - " + tmpSesHndl, printWid)
+                    # 3.1.1.3. "CIP sequence count"
+                    stdscr.addnstr(4, 2, "Sequence Counter - " + curr4dCSC, printWid)
+                # 3.1.2. Read Modify Write Tag Service (0x4e)
+                elif tmpSRN.endswith("4e") and curr4eCSC != tmpCSC:
+                    # 3.1.1.0. Update the CIP sequence count
+                    curr4eCSC = tmpCSC
+                    # 3.1.1.1. "service request number"
+                    stdscr.addnstr(6, 2, tmpSRN, printWid)
+                    # 3.1.1.2. "session handle"
+                    stdscr.addnstr(7, 2, "Session Handle - " + tmpSesHndl, printWid)
+                    # 3.1.1.3. "CIP sequence count"
+                    stdscr.addnstr(8, 2, "Sequence Counter - " + curr4eCSC, printWid)
 
             # 3.1.N. Print number of packets parsed
-            stdscr.addnstr(printLen, 2, "Parsed " + str(numPackets) + " packets", printWid)
+            stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
 
             # 3.2. Refresh the window
             stdscr.refresh()
@@ -238,6 +285,11 @@ if __name__ == "__main__":
                 break
 
         ### BREAK THE CURSE ###
+        # This is only needed for FileCapture()
+        # LiveCapture() will theoretically go on forever
+        while True:
+            if -1 != stdscr.getch():
+                break
         break_a_curse(stdscr)
 
 
