@@ -50,7 +50,7 @@ def dynamic_execution(pcapFile, interName, dispFilter):
         raise TypeError("interName is not a string)
     elif not isinstance(dispFilter, str):
         raise TypeError("dispFilter is not a string)
-    elif pcapFile.__len__() > 0 && intername.__len__() > 0:
+    elif pcapFile.__len__() > 0 and intername.__len__() > 0:
         raise ValueError("Unable to process both pcap files and live capture")
                         
     ### DECIDE ###
