@@ -381,7 +381,7 @@ if __name__ == "__main__":
             else:
                 lCapture = pyshark.LiveCapture(interName)
                         
-            packetGen = lCapture..sniff_continuously()
+            packetGen = lCapture.sniff_continuously
         else:
             raise RuntimeError("Dynamic generator logic failed")
         #####################################################################
