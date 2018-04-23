@@ -45,11 +45,11 @@ def dynamic_execution(pcapFile, interName, dispFilter):
     
     ### INPUT VALIDATION ###
     if not isinstance(pcapFile, str):
-        raise TypeError("pcapFile is not a string)
+        raise TypeError("pcapFile is not a string")
     elif not isinstance(interName, str):
-        raise TypeError("interName is not a string)
+        raise TypeError("interName is not a string")
     elif not isinstance(dispFilter, str):
-        raise TypeError("dispFilter is not a string)
+        raise TypeError("dispFilter is not a string")
     elif pcapFile.__len__() > 0 and intername.__len__() > 0:
         raise ValueError("Unable to process both pcap files and live capture")
                         
@@ -181,7 +181,8 @@ def get_enip_connection_ID(packet):
 
     ### EXRACT DATA ###
     try:
-        retVal = packet.enip.connid  # This is a guess since I'm offline
+        # retVal = packet.enip.connid  # This is a guess since I'm offline
+        retVal = packet.enip.cpf_cai_connid  # THIS is it
     except AttributeError:
         pass
 
@@ -281,8 +282,8 @@ def get_cip_srn(packet):
 
 if __name__ == "__main__":
     ### LOCAL VARIABLES ###
-    filename = ""  # Filename to pyshark.FileCapture from
-    ifaceName = ""  # Interface name to pyshark.LiveCapture from
+    pcapFile = ""  # Filename to pyshark.FileCapture from
+    interName = ""  # Interface name to pyshark.LiveCapture from
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
     tmpConnID = ""  # Temp variable to hold the ENIP connection ID
     tmpSRN = ""  # Temp variable to hold the CIP service request number
@@ -295,16 +296,17 @@ if __name__ == "__main__":
     printLen = 0  # Maximum printable area of the curses window
     numPackets = 0  # Keep track of the number of packets
     # Wireshark display filter for specific "service request numbers"
-    cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+    cipDispFilter = ""
+    # cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
 
     ### PARSE ARGS ###
     args = parse_arguments() # Parsed arguments
     
     ### INPUT VALIDATION ###
     if args.file and args.file.__len__() > 0:
-        filename = args.file
+        pcapFile = args.file
     elif args.interface and args.interface.__len__() > 0:
-        ifacename = args.interface
+        interName = args.interface
     else:
         raise RuntimeError("Received invalid arguments")
     
@@ -369,15 +371,15 @@ if __name__ == "__main__":
         #####################################################################
         ############################## IDEA #2 ##############################
         if pcapFile.__len__() > 0:
-            if dispFilter.__len__() > 0:
-                fCapture = pyshark.FileCapture(pcapFile, display_filter = dispFilter)
+            if cipDispFilter.__len__() > 0:
+                fCapture = pyshark.FileCapture(pcapFile, display_filter = cipDispFilter)
             else:
                 fCapture = pyshark.FileCapture(pcapFile)
                         
             packetGen = fCapture.__iter__
         elif interName.__len__() > 0:
-            if dispFilter.__len__() > 0:
-                lCapture = pyshark.LiveCapture(interName, display_filter = dispFilter)
+            if cipDispFilter.__len__() > 0:
+                lCapture = pyshark.LiveCapture(interName, display_filter = cipDispFilter)
             else:
                 lCapture = pyshark.LiveCapture(interName)
                         
@@ -385,14 +387,14 @@ if __name__ == "__main__":
         else:
             raise RuntimeError("Dynamic generator logic failed")
         #####################################################################
-                        
+        
         for packet in packetGen():
         # for packet in fcapture:
         # for packet in newVar():
         ######################################################################
         ######################################################################
         ######################################################################
-
+            # stdscr.addnstr(1, 1, str(numPackets) + " " + str(type(packet)), printWid)  # DEBUGGING
             # 2. PARSE PACKETS
             # 2.0. Keep track of packet number
             numPackets += 1
@@ -438,12 +440,12 @@ if __name__ == "__main__":
 
             # 3.1.3. Print number of packets parsed
             # 3.1.3.1. Print the file for demonstration purposes
-            if filename.__len__() > 0:
-                if filename.__len__() + "Parsing file: ".__len__() > printWid:
+            if pcapFile.__len__() > 0:
+                if pcapFile.__len__() + "Parsing file: ".__len__() > printWid:
                     stdscr.addnstr(printLen - 2, 2, "Parsing file: " 
-                                   + os.path.basename(filename), printWid)
+                                   + os.path.basename(pcapFile), printWid)
                 else:
-                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " + filename, printWid)
+                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " + pcapFile, printWid)
             # 3.1.3.2. Tell the user how to exit
             stdscr.addnstr(printLen - 1, 2, "Press [Enter] to stop parsing and [Enter] again to exit", printWid)
             # 3.1.3.3. Print the number of packets processed
