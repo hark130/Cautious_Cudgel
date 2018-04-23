@@ -331,7 +331,7 @@ if __name__ == "__main__":
         ######################################################################
         # 1.1. Real input ####################################################
         ######################################################################
-        # capture = pyshark.LiveCapture(display_filter = cipDispFilter)
+        # lCapture = pyshark.LiveCapture(display_filter = cipDispFilter)
         # for packet in capture.sniff_continuously():
 
         ######################################################################
@@ -351,22 +351,42 @@ if __name__ == "__main__":
         # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
         #                         "1.4_set_valve_open_0_percent.pcap")
 
-        if not os.path.isfile(filename):
-            break_a_curse(stdscr)
-            raise IOError("Unable to open pcap")
+        # if not os.path.isfile(filename):
+        #     break_a_curse(stdscr)
+        #     raise IOError("Unable to open pcap")
 
-        fcapture = pyshark.FileCapture(filename, display_filter = cipDispFilter)
+        # fCapture = pyshark.FileCapture(filename, display_filter = cipDispFilter)
         
         # if filename.__len__() > 0:
         #     newVar = pyshark.FileCapture(filename, display_filter = cipDispFilter)
         # elif ifaceName.__len__() > 0:
         #     newVar = pyshark.LiveCapture(ifaceName, display_filter = cipDispFilter)
 
-        packetGen = dynamic_execution(filename, ifaceName, cipDispFilter)
-        if not packetGen:
-            raise RuntimeError("dynamic_execution() failed")
+        ############################## IDEA #1 ##############################
+        # packetGen = dynamic_execution(filename, ifaceName, cipDispFilter)
+        # if not packetGen:
+        #     raise RuntimeError("dynamic_execution() failed")
+        #####################################################################
+        ############################## IDEA #2 ##############################
+        if pcapFile.__len__() > 0:
+            if dispFilter.__len__() > 0:
+                fCapture = pyshark.FileCapture(pcapFile, display_filter = dispFilter)
+            else:
+                fCapture = pyshark.FileCapture(pcapFile)
                         
-        for packet in packetGen:
+            packetGen = fCapture.next
+        elif interName.__len__() > 0:
+            if dispFilter.__len__() > 0:
+                lCapture = pyshark.LiveCapture(interName, display_filter = dispFilter)
+            else:
+                lCapture = pyshark.LiveCapture(interName)
+                        
+            packetGen = lCapture..sniff_continuously()
+        else:
+            raise RuntimeError("Dynamic generator logic failed")
+        #####################################################################
+                        
+        for packet in packetGen():
         # for packet in fcapture:
         # for packet in newVar():
         ######################################################################
