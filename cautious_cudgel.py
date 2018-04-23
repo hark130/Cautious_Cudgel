@@ -374,7 +374,7 @@ if __name__ == "__main__":
             else:
                 fCapture = pyshark.FileCapture(pcapFile)
                         
-            packetGen = fCapture.next
+            packetGen = fCapture.__iter__
         elif interName.__len__() > 0:
             if dispFilter.__len__() > 0:
                 lCapture = pyshark.LiveCapture(interName, display_filter = dispFilter)
