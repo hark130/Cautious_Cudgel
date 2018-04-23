@@ -223,6 +223,8 @@ if __name__ == "__main__":
     printWid = 0  # Maximum printable area of the curses window
     printLen = 0  # Maximum printable area of the curses window
     numPackets = 0  # Keep track of the number of packets
+    # Wireshark display filter for specific "service request numbers"
+    cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
 
     ### WORK ###
     if stdscr:
@@ -230,6 +232,7 @@ if __name__ == "__main__":
         maxWid, maxLen = get_curse_dimensions(stdscr)
 
         if maxWid < 1 or maxLen < 1:
+            break_a_curse(stdscr)
             raise RuntimeError("get_curse_dimensions appears to have failed")
         elif maxWid < (29 + 4) or maxLen < (13 + 4):
             break_a_curse(stdscr)
@@ -245,7 +248,7 @@ if __name__ == "__main__":
         ######################################################################
         # 1.1. Real input ####################################################
         ######################################################################
-        # capture = pyshark.LiveCapture()
+        # capture = pyshark.LiveCapture(display_filter = cipDispFilter)
         # for packet in capture.sniff_continuously():
 
         ######################################################################
@@ -269,7 +272,7 @@ if __name__ == "__main__":
             break_a_curse(stdscr)
             raise IOError("Unable to open pcap")
 
-        fcapture = pyshark.FileCapture(filename)
+        fcapture = pyshark.FileCapture(filename, display_filter = cipDispFilter)
 
         for packet in fcapture:
         ######################################################################
