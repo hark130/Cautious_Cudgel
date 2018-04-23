@@ -213,6 +213,7 @@ if __name__ == "__main__":
     stdscr = curse_a_win()  # Initialize a curses window
     filename = ""  # Filename to pyshark.FileCapture from
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
+    tmpConnID = ""  # Temp variable to hold the ENIP connection ID
     tmpSRN = ""  # Temp variable to hold the CIP service request number
     tmpCSC = ""  # Temp variable to hold the CIP sequence count
     curr4dCSC = ""  # Current 0x4d CIP sequence count
@@ -281,14 +282,17 @@ if __name__ == "__main__":
             # 2.1. Get the "service request number"
             tmpSRN = get_cip_srn(packet)
             # 2.2. Get the "session handle"
-            tmpSesHndl = get_enip_session_handle(packet)            
-            # 2.3. Get the "CIP sequence count"
+            tmpSesHndl = get_enip_session_handle(packet)
+            # 2.3. Get the "connection ID"
+            tmpConnID = get_enip_connection_ID(packet)
+            # 2.4. Get the "CIP sequence count"
             tmpCSC = get_enip_CSC(packet)
 
             # 3. PRINT DATA
             # 3.1. Update the window
             if tmpSRN.__len__() > 0 \
             and tmpSesHndl.__len__() > 0 \
+            and tmpConnID.__len__() > 0 \
             and tmpCSC.__len__() > 0:
                 # 3.1.1. Write Tag Service (0x4d)
                 if tmpSRN.endswith("4d") and curr4dCSC != tmpCSC:
@@ -298,8 +302,10 @@ if __name__ == "__main__":
                     stdscr.addnstr(2, 2, tmpSRN, printWid)
                     # 3.1.1.2. "session handle"
                     stdscr.addnstr(3, 2, "Session Handle - " + tmpSesHndl, printWid)
-                    # 3.1.1.3. "CIP sequence count"
-                    stdscr.addnstr(4, 2, "Sequence Counter - " + curr4dCSC, printWid)
+                    # 3.1.1.3. "connection ID"
+                    stdscr.addnstr(4, 2, "Connection ID - " + tmpConnID, printWid)
+                    # 3.1.1.4. "CIP sequence count"
+                    stdscr.addnstr(5, 2, "Sequence Counter - " + curr4dCSC, printWid)
                 # 3.1.2. Read Modify Write Tag Service (0x4e)
                 elif tmpSRN.endswith("4e") and curr4eCSC != tmpCSC:
                     # 3.1.1.0. Update the CIP sequence count
@@ -308,8 +314,10 @@ if __name__ == "__main__":
                     stdscr.addnstr(6, 2, tmpSRN, printWid)
                     # 3.1.1.2. "session handle"
                     stdscr.addnstr(7, 2, "Session Handle - " + tmpSesHndl, printWid)
+                    # 3.1.1.3. "connection ID"
+                    stdscr.addnstr(8, 2, "Connection ID - " + tmpConnID, printWid)
                     # 3.1.1.3. "CIP sequence count"
-                    stdscr.addnstr(8, 2, "Sequence Counter - " + curr4eCSC, printWid)
+                    stdscr.addnstr(9, 2, "Sequence Counter - " + curr4eCSC, printWid)
 
             # 3.1.3. Print number of packets parsed
             # 3.1.3.1. Print the file for demonstration purposes
