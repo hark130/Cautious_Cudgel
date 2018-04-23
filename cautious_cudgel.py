@@ -231,8 +231,8 @@ if __name__ == "__main__":
 
         if maxWid < 1 or maxLen < 1:
             raise RuntimeError("get_curse_dimensions appears to have failed")
-        ######################### DEFINE THESE LATER #########################
-        elif maxWid < 20 or maxLen < 13:
+        elif maxWid < (29 + 4) or maxLen < (13 + 4):
+            break_a_curse(stdscr)
             raise RuntimeError("Terminal window is too small")
         else:
             printWid = maxWid - 4
@@ -311,23 +311,25 @@ if __name__ == "__main__":
                     # 3.1.1.0. Update the CIP sequence count
                     curr4eCSC = tmpCSC
                     # 3.1.1.1. "service request number"
-                    stdscr.addnstr(6, 2, tmpSRN, printWid)
+                    stdscr.addnstr(7, 2, tmpSRN, printWid)
                     # 3.1.1.2. "session handle"
-                    stdscr.addnstr(7, 2, "Session Handle - " + tmpSesHndl, printWid)
+                    stdscr.addnstr(8, 2, "Session Handle - " + tmpSesHndl, printWid)
                     # 3.1.1.3. "connection ID"
-                    stdscr.addnstr(8, 2, "Connection ID - " + tmpConnID, printWid)
+                    stdscr.addnstr(9, 2, "Connection ID - " + tmpConnID, printWid)
                     # 3.1.1.3. "CIP sequence count"
-                    stdscr.addnstr(9, 2, "Sequence Counter - " + curr4eCSC, printWid)
+                    stdscr.addnstr(10, 2, "Sequence Counter - " + curr4eCSC, printWid)
 
             # 3.1.3. Print number of packets parsed
             # 3.1.3.1. Print the file for demonstration purposes
             if filename.__len__() > 0:
                 if filename.__len__() + "Parsing file: ".__len__() > printWid:
-                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " 
+                    stdscr.addnstr(printLen - 2, 2, "Parsing file: " 
                                    + os.path.basename(filename), printWid)
                 else:
                     stdscr.addnstr(printLen - 1, 2, "Parsing file: " + filename, printWid)
-            # 3.1.3.2. Print the number of packets processed
+            # 3.1.3.2. Tell the user how to exit
+            stdscr.addnstr(printLen - 1, 2, "Press [Enter] to stop parsing and [Enter] again to exit", printWid)
+            # 3.1.3.3. Print the number of packets processed
             stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
 
             # 3.2. Refresh the window
