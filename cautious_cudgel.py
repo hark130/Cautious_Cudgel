@@ -30,45 +30,6 @@ def parse_arguments():
     return args
 
 
-def dynamic_execution(pcapFile, interName, dispFilter):
-    '''
-        PURPOSE - Dynamically choose 'packet' generator
-        INPUT
-            pcapFile - pcap filename
-            interName - Interface name
-            dispFilter - Display filter
-        OUTPUT
-            On success, packet generator
-    '''
-    ### LOCAL VARIABLES ###
-    retVal = None
-    
-    ### INPUT VALIDATION ###
-    if not isinstance(pcapFile, str):
-        raise TypeError("pcapFile is not a string")
-    elif not isinstance(interName, str):
-        raise TypeError("interName is not a string")
-    elif not isinstance(dispFilter, str):
-        raise TypeError("dispFilter is not a string")
-    elif pcapFile.__len__() > 0 and intername.__len__() > 0:
-        raise ValueError("Unable to process both pcap files and live capture")
-                        
-    ### DECIDE ###
-    if pcapFile.__len__() > 0:
-        if dispFilter.__len__() > 0:
-            yield pyshark.FileCapture(pcapFile, display_filter = dispFilter)
-        else:
-            yield pyshark.FileCapture(pcapFile)
-    elif interName.__len__() > 0:
-        if dispFilter.__len__() > 0:
-            yield pyshark.LiveCapture(interName, display_filter = dispFilter)
-        else:
-            yield pyshark.LiveCapture(interName)
-
-    ### DONE ###
-    return retVal        
-    
-
 ##############################################################################
 ######################### ARGS HELPER FUNCTIONS STOP #########################
 ##############################################################################
@@ -330,46 +291,6 @@ if __name__ == "__main__":
         ######################################################################
         ######################################################################
         # 1. GET PACKETS
-        ######################################################################
-        # 1.1. Real input ####################################################
-        ######################################################################
-        # lCapture = pyshark.LiveCapture(display_filter = cipDispFilter)
-        # for packet in capture.sniff_continuously():
-
-        ######################################################################
-        # 1.1. Test input ####################################################
-        ######################################################################
-        # filename = "pcaps/talabor1_1.pcap"
-        # filename = os.path.join(os.getcwd(), "pcaps", 
-        #                         "01-Lab-Demo-20180417.pcapng")
-        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
-        #                         "acdc_main.pcapng")
-        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
-        #                         "1.1_set_auto_vacuum_valve.pcap")
-        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
-        #                         "1.2_set_manual_vacuum_valve.pcap")
-        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
-        #                         "1.3_set_valve_open_100_percent.pcap")
-        # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
-        #                         "1.4_set_valve_open_0_percent.pcap")
-
-        # if not os.path.isfile(filename):
-        #     break_a_curse(stdscr)
-        #     raise IOError("Unable to open pcap")
-
-        # fCapture = pyshark.FileCapture(filename, display_filter = cipDispFilter)
-        
-        # if filename.__len__() > 0:
-        #     newVar = pyshark.FileCapture(filename, display_filter = cipDispFilter)
-        # elif ifaceName.__len__() > 0:
-        #     newVar = pyshark.LiveCapture(ifaceName, display_filter = cipDispFilter)
-
-        ############################## IDEA #1 ##############################
-        # packetGen = dynamic_execution(filename, ifaceName, cipDispFilter)
-        # if not packetGen:
-        #     raise RuntimeError("dynamic_execution() failed")
-        #####################################################################
-        ############################## IDEA #2 ##############################
         if pcapFile.__len__() > 0:
             if cipDispFilter.__len__() > 0:
                 fCapture = pyshark.FileCapture(pcapFile, display_filter = cipDispFilter)
@@ -386,15 +307,8 @@ if __name__ == "__main__":
             packetGen = lCapture.sniff_continuously
         else:
             raise RuntimeError("Dynamic generator logic failed")
-        #####################################################################
         
         for packet in packetGen():
-        # for packet in fcapture:
-        # for packet in newVar():
-        ######################################################################
-        ######################################################################
-        ######################################################################
-            # stdscr.addnstr(1, 1, str(numPackets) + " " + str(type(packet)), printWid)  # DEBUGGING
             # 2. PARSE PACKETS
             # 2.0. Keep track of packet number
             numPackets += 1
@@ -562,3 +476,42 @@ if __name__ == "__main__":
 
 #     ### DONE ###
 #     return
+
+
+# def dynamic_execution(pcapFile, interName, dispFilter):
+#     '''
+#         PURPOSE - Dynamically choose 'packet' generator
+#         INPUT
+#             pcapFile - pcap filename
+#             interName - Interface name
+#             dispFilter - Display filter
+#         OUTPUT
+#             On success, packet generator
+#     '''
+#     ### LOCAL VARIABLES ###
+#     retVal = None
+    
+#     ### INPUT VALIDATION ###
+#     if not isinstance(pcapFile, str):
+#         raise TypeError("pcapFile is not a string")
+#     elif not isinstance(interName, str):
+#         raise TypeError("interName is not a string")
+#     elif not isinstance(dispFilter, str):
+#         raise TypeError("dispFilter is not a string")
+#     elif pcapFile.__len__() > 0 and intername.__len__() > 0:
+#         raise ValueError("Unable to process both pcap files and live capture")
+                        
+#     ### DECIDE ###
+#     if pcapFile.__len__() > 0:
+#         if dispFilter.__len__() > 0:
+#             yield pyshark.FileCapture(pcapFile, display_filter = dispFilter)
+#         else:
+#             yield pyshark.FileCapture(pcapFile)
+#     elif interName.__len__() > 0:
+#         if dispFilter.__len__() > 0:
+#             yield pyshark.LiveCapture(interName, display_filter = dispFilter)
+#         else:
+#             yield pyshark.LiveCapture(interName)
+
+#     ### DONE ###
+#     return retVal  
