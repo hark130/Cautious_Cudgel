@@ -1,6 +1,37 @@
+from argparse import ArgumentParser
 import curses
 import os
 import pyshark
+
+
+##############################################################################
+######################### ARGS HELPER FUNCTIONS START ########################
+##############################################################################
+
+def parse_arguments():
+    '''
+        PURPOSE - Parse argument requirements here to keep 'main' clean
+        INPUT - None
+        OUTPUT - Command line argument list from ArgumentParser object
+    '''
+    # Parser object
+    parser = ArgumentParser()
+    
+    # Make the arguments mutually exclusive
+    group = parser.add_mutually_exclusive_group(required = True)
+    
+    # Command line arguments
+    group.add_argument("-f", "--file", type = str, help = "Pcap filename to parse")
+    group.add_argument("-i", "--interface", type = str, help = "Interface name to pull a live capture")
+    
+    # List of arguments from the command line
+    args = parser.parse_args()
+    
+    return args
+
+##############################################################################
+######################### ARGS HELPER FUNCTIONS STOP #########################
+##############################################################################
 
 
 ##############################################################################
@@ -210,8 +241,8 @@ def get_cip_srn(packet):
 
 if __name__ == "__main__":
     ### LOCAL VARIABLES ###
-    stdscr = curse_a_win()  # Initialize a curses window
     filename = ""  # Filename to pyshark.FileCapture from
+    ifaceName = ""  # Interface name to pyshark.LiveCapture from
     tmpSesHndl = ""  # Temp variable to hold the ENIP session handle
     tmpConnID = ""  # Temp variable to hold the ENIP connection ID
     tmpSRN = ""  # Temp variable to hold the CIP service request number
@@ -226,7 +257,19 @@ if __name__ == "__main__":
     # Wireshark display filter for specific "service request numbers"
     cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
 
+    ### PARSE ARGS ###
+    args = parse_arguments() # Parsed arguments
+    
+    ### INPUT VALIDATION ###
+    if args.file and args.file.__len__() > 0:
+        filename = args.file
+    elif args.interface and args.interface.__len__() > 0:
+        ifacename = args.interface
+    else:
+        raise RuntimeError("Received invalid arguments")
+    
     ### WORK ###
+    stdscr = curse_a_win()  # Initialize a curses window
     if stdscr:
         # 0. GET CURSES WINDOW DIMENSIONS
         maxWid, maxLen = get_curse_dimensions(stdscr)
@@ -255,8 +298,8 @@ if __name__ == "__main__":
         # 1.1. Test input ####################################################
         ######################################################################
         # filename = "pcaps/talabor1_1.pcap"
-        filename = os.path.join(os.getcwd(), "pcaps", 
-                                "01-Lab-Demo-20180417.pcapng")
+        # filename = os.path.join(os.getcwd(), "pcaps", 
+        #                         "01-Lab-Demo-20180417.pcapng")
         # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
         #                         "acdc_main.pcapng")
         # filename = os.path.join(os.getcwd(), "pcaps", "acdc packets", 
