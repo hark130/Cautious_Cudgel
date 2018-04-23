@@ -287,9 +287,6 @@ if __name__ == "__main__":
             printWid = maxWid - 4
             printLen = maxLen - 4
 
-        ######################################################################
-        ######################################################################
-        ######################################################################
         # 1. GET PACKETS
         if pcapFile.__len__() > 0:
             if cipDispFilter.__len__() > 0:
@@ -373,8 +370,6 @@ if __name__ == "__main__":
                 break
 
         ### BREAK THE CURSE ###
-        # This is only needed for FileCapture()
-        # LiveCapture() will theoretically go on forever
         while True:
             if -1 != stdscr.getch():
                 break
