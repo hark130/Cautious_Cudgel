@@ -93,6 +93,31 @@ def get_curse_dimensions(cWin):
 ##############################################################################
 
 
+def get_enip_connection_ID(packet):
+    '''
+    PURPOSE - Extract the connection ID from an ENIP header
+    INPUT - pyshark Packet object
+    OUTPUT
+        On success, a string object containing the connection ID
+        On failure, an empty string object
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = ""  # Will contain the ENIP connection ID if it exists
+
+    ### INPUT VALIDATION ###
+    if not isinstance(packet, pyshark.packet.packet.Packet):
+        raise ValueError("Invalid packet type")
+
+    ### EXRACT DATA ###
+    try:
+        retVal = packet.enip.connid  # This is a guess since I'm offline
+    except AttributeError:
+        pass
+
+    ### DONE ###
+    return retVal
+
+
 def get_enip_session_handle(packet):
     '''
     PURPOSE - Extract the session handle from an ENIP header
