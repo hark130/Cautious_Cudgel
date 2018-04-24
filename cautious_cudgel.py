@@ -304,6 +304,7 @@ def main():
     # Wireshark display filter for specific "service request numbers"
     # cipDispFilter = ""
     cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+    overPrefs = { 'tcp.analyze_sequence_numbers' : 'FALSE'}
     peekABoo = None  # Temp return value for peek_into_generator() calls
 
     ### PARSE ARGS ###
@@ -340,22 +341,22 @@ def main():
         if pcapFile.__len__() > 0:
             try:
                 if cipDispFilter.__len__() > 0:
-                    fCapture = pyshark.FileCapture(pcapFile, display_filter = cipDispFilter)
+                    fCapture = pyshark.FileCapture(pcapFile, override_prefs = overPrefs, display_filter = cipDispFilter)
                 else:
-                    fCapture = pyshark.FileCapture(pcapFile)
+                    fCapture = pyshark.FileCapture(pcapFile, override_prefs = overPrefs)
                             
-                packetGen = fCapture.__iter__
+                # packetGen = fCapture.__iter__
             except Exception as err:
                 break_a_curse(stdscr)
                 raise err
         elif interName.__len__() > 0:
             try:
                 if cipDispFilter.__len__() > 0:
-                    lCapture = pyshark.LiveCapture(interName, display_filter = cipDispFilter)
+                    lCapture = pyshark.LiveCapture(interName, override_prefs = overPrefs, display_filter = cipDispFilter)
                 else:
-                    lCapture = pyshark.LiveCapture(interName)
+                    lCapture = pyshark.LiveCapture(interName, override_prefs = overPrefs)
                             
-                packetGen = lCapture.sniff_continuously
+                # packetGen = lCapture.sniff_continuously
             except Exception as err:
                 break_a_curse(stdscr)
                 raise err
