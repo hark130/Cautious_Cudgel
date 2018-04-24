@@ -257,15 +257,18 @@ if __name__ == "__main__":
     printLen = 0  # Maximum printable area of the curses window
     numPackets = 0  # Keep track of the number of packets
     # Wireshark display filter for specific "service request numbers"
-    cipDispFilter = ""
-    # cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+    # cipDispFilter = ""
+    cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
 
     ### PARSE ARGS ###
     args = parse_arguments() # Parsed arguments
     
     ### INPUT VALIDATION ###
     if args.file and args.file.__len__() > 0:
-        pcapFile = args.file
+        pcapFile = os.path.join(os.getcwd(), args.file)
+        # Is this actually a file?
+        if not os.path.isfile(pcapFile):
+            raise OSError("{} does not exist".format(pcapFile))
     elif args.interface and args.interface.__len__() > 0:
         interName = args.interface
     else:
@@ -289,19 +292,27 @@ if __name__ == "__main__":
 
         # 1. GET PACKETS
         if pcapFile.__len__() > 0:
-            if cipDispFilter.__len__() > 0:
-                fCapture = pyshark.FileCapture(pcapFile, display_filter = cipDispFilter)
-            else:
-                fCapture = pyshark.FileCapture(pcapFile)
-                        
-            packetGen = fCapture.__iter__
+            try:
+                if cipDispFilter.__len__() > 0:
+                    fCapture = pyshark.FileCapture(pcapFile, display_filter = cipDispFilter)
+                else:
+                    fCapture = pyshark.FileCapture(pcapFile)
+                            
+                packetGen = fCapture.__iter__
+            except Exception as err:
+                break_a_curse(stdscr)
+                raise err
         elif interName.__len__() > 0:
-            if cipDispFilter.__len__() > 0:
-                lCapture = pyshark.LiveCapture(interName, display_filter = cipDispFilter)
-            else:
-                lCapture = pyshark.LiveCapture(interName)
-                        
-            packetGen = lCapture.sniff_continuously
+            try:
+                if cipDispFilter.__len__() > 0:
+                    lCapture = pyshark.LiveCapture(interName, display_filter = cipDispFilter)
+                else:
+                    lCapture = pyshark.LiveCapture(interName)
+                            
+                packetGen = lCapture.sniff_continuously
+            except Exception as err:
+                break_a_curse(stdscr)
+                raise err
         else:
             raise RuntimeError("Dynamic generator logic failed")
         
@@ -356,11 +367,14 @@ if __name__ == "__main__":
                     stdscr.addnstr(printLen - 2, 2, "Parsing file: " 
                                    + os.path.basename(pcapFile), printWid)
                 else:
-                    stdscr.addnstr(printLen - 1, 2, "Parsing file: " + pcapFile, printWid)
+                    stdscr.addnstr(printLen - 2, 2, "Parsing file: " + pcapFile, printWid)
             # 3.1.3.2. Tell the user how to exit
             stdscr.addnstr(printLen - 1, 2, "Press [Enter] to stop parsing and [Enter] again to exit", printWid)
             # 3.1.3.3. Print the number of packets processed
-            stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
+            if 1 == numPackets:
+                stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packet", printWid)
+            elif numPackets > 1:                
+                stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
 
             # 3.2. Refresh the window
             stdscr.refresh()
