@@ -67,9 +67,9 @@ def peek_into_generator(dynamo):
             pass
         else:
             # chain() 'glues' dynamo back onto the end of "first"
-            retVal = tuple((first, dynamo))
+            # retVal = tuple((first, dynamo))
             # The statement below was adding an extra packet
-            # retVal = tuple((first, chain([first], dynamo)))
+            retVal = tuple((first, chain([first], dynamo)))
 
     ### DONE ###
     return retVal
