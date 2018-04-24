@@ -1,4 +1,6 @@
 from argparse import ArgumentParser
+from itertools import chain
+from sys import exit
 import curses
 import os
 import pyshark
@@ -32,6 +34,49 @@ def parse_arguments():
 
 ##############################################################################
 ######################### ARGS HELPER FUNCTIONS STOP #########################
+##############################################################################
+
+
+##############################################################################
+####################### PYSHARK HELPER FUNCTIONS START #######################
+##############################################################################
+
+def peek_into_generator(dynamo):
+    '''
+        PURPOSE - Determine if a 'generator' has anything to give in order
+            to avoid 'hanging'
+        INPUT
+            dynamo - An iterable object
+        OUTPUT
+            If dynamo contains anything, a tuple (item[0], dynamo)
+            If dynamo is empty, None
+        NOTES
+            This this function returns a tuple, treat tuple[1] the same
+                as you would dynamo.  In fact, feel free to overwrite
+                the original dynamo with tuple[1].
+    '''
+    ### LOCAL VARIABLES ###
+    retVal = None
+
+    ### INPUT VALIDATION ###
+    if dynamo is not None:
+        ### PEEK ###
+        try:
+            first = next(dynamo)
+        except StopIteration:
+            pass
+        else:
+            # chain() 'glues' dynamo back onto the end of "first"
+            retVal = tuple((first, dynamo))
+            # The statement below was adding an extra packet
+            # retVal = tuple((first, chain([first], dynamo)))
+
+    ### DONE ###
+    return retVal
+
+
+##############################################################################
+####################### PYSHARK HELPER FUNCTIONS STOP ########################
 ##############################################################################
 
 
@@ -241,7 +286,7 @@ def get_cip_srn(packet):
 ##############################################################################
 
 
-if __name__ == "__main__":
+def main():
     ### LOCAL VARIABLES ###
     pcapFile = ""  # Filename to pyshark.FileCapture from
     interName = ""  # Interface name to pyshark.LiveCapture from
@@ -259,6 +304,7 @@ if __name__ == "__main__":
     # Wireshark display filter for specific "service request numbers"
     # cipDispFilter = ""
     cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+    peekABoo = None  # Temp return value for peek_into_generator() calls
 
     ### PARSE ARGS ###
     args = parse_arguments() # Parsed arguments
@@ -290,7 +336,7 @@ if __name__ == "__main__":
             printWid = maxWid - 4
             printLen = maxLen - 4
 
-        # 1. GET PACKETS
+        # 1. PREPARE THE PACKET GENERATOR
         if pcapFile.__len__() > 0:
             try:
                 if cipDispFilter.__len__() > 0:
@@ -316,74 +362,109 @@ if __name__ == "__main__":
         else:
             raise RuntimeError("Dynamic generator logic failed")
 
+        # 2. CHECK THE PACKET GENERATOR FOR PACKETS
         # Prepare the user for no input
-        stdscr.addnstr(2, 2, "Waiting for packets...", printWid)
-        stdscr.refresh()
+        while (1):
+            stdscr.addnstr(2, 2, "Waiting for packets...", printWid)
+            stdscr.addnstr(3, 2, "Press [Enter] to stop waiting.", printWid)
+            stdscr.refresh()
+
+            # Give the user a chance to stop waiting for packets
+            if -1 != stdscr.getch():
+                try:
+                    break_a_curse(stdscr)
+                except Exception as err:
+                    pass  # Ignore all Exceptions... pyshark gets 'barky'
+                finally:
+                    # exit(0)
+                    raise SystemExit("User does not want to wait any longer")
+            # Check for packets
+            else:
+                if pcapFile.__len__() > 0:
+                    peekABoo = peek_into_generator(fCapture)
+                elif interName.__len__() > 0:
+                    peekABoo = peek_into_generator(lCapture)
+                else:
+                    raise RuntimeError("Dynamic generator logic failed")
+
+                # Found a packet?
+                if isinstance(peekABoo, tuple) and peekABoo.__len__() == 2:
+                    # Found a packet!
+                    if pcapFile.__len__() > 0:
+                        packetGen = peekABoo[1].__iter__
+                    elif interName.__len__() > 0:
+                        packetGen = peekABoo[1].sniff_continuously
+                    else:
+                        raise RuntimeError("Dynamic generator logic failed")
+                    stdscr.clear()  # Clear the screen
+                    stdscr.refresh()  # Update the screen
+                    break
         
+        # 3. ITERATE THROUGH THE PACKETS THE GENERATOR HAS TO OFFER
         for packet in packetGen():
-            # 2. PARSE PACKETS
-            # 2.0. Keep track of packet number
+            # 3.1. PARSE PACKETS
+            # Keep track of packet number
             numPackets += 1
-            # 2.1. Get the "service request number"
+            # Get the "service request number"
             tmpSRN = get_cip_srn(packet)
-            # 2.2. Get the "session handle"
+            # Get the "session handle"
             tmpSesHndl = get_enip_session_handle(packet)
-            # 2.3. Get the "connection ID"
+            # Get the "connection ID"
             tmpConnID = get_enip_connection_ID(packet)
-            # 2.4. Get the "CIP sequence count"
+            # Get the "CIP sequence count"
             tmpCSC = get_enip_CSC(packet)
 
-            # 3. PRINT DATA
-            # 3.1. Update the window
+            # 3.2. PRINT DATA
+            # 3.2.1. Update the window
             if tmpSRN.__len__() > 0 \
             and tmpSesHndl.__len__() > 0 \
             and tmpConnID.__len__() > 0 \
             and tmpCSC.__len__() > 0:
-                # 3.1.1. Write Tag Service (0x4d)
+                # Write Tag Service (0x4d)
                 if tmpSRN.endswith("4d") and curr4dCSC != tmpCSC:
-                    # 3.1.1.0. Update the CIP sequence count
+                    # Update the CIP sequence count
                     curr4dCSC = tmpCSC
-                    # 3.1.1.1. "service request number"
+                    # "service request number"
                     stdscr.addnstr(2, 2, tmpSRN, printWid)
-                    # 3.1.1.2. "session handle"
+                    # "session handle"
                     stdscr.addnstr(3, 2, "Session Handle - " + tmpSesHndl, printWid)
-                    # 3.1.1.3. "connection ID"
+                    # "connection ID"
                     stdscr.addnstr(4, 2, "Connection ID - " + tmpConnID, printWid)
-                    # 3.1.1.4. "CIP sequence count"
+                    # "CIP sequence count"
                     stdscr.addnstr(5, 2, "Sequence Counter - " + curr4dCSC, printWid)
-                # 3.1.2. Read Modify Write Tag Service (0x4e)
+                # Read Modify Write Tag Service (0x4e)
                 elif tmpSRN.endswith("4e") and curr4eCSC != tmpCSC:
-                    # 3.1.1.0. Update the CIP sequence count
+                    # Update the CIP sequence count
                     curr4eCSC = tmpCSC
-                    # 3.1.1.1. "service request number"
+                    # "service request number"
                     stdscr.addnstr(7, 2, tmpSRN, printWid)
-                    # 3.1.1.2. "session handle"
+                    # "session handle"
                     stdscr.addnstr(8, 2, "Session Handle - " + tmpSesHndl, printWid)
-                    # 3.1.1.3. "connection ID"
+                    # "connection ID"
                     stdscr.addnstr(9, 2, "Connection ID - " + tmpConnID, printWid)
-                    # 3.1.1.3. "CIP sequence count"
+                    # "CIP sequence count"
                     stdscr.addnstr(10, 2, "Sequence Counter - " + curr4eCSC, printWid)
 
-            # 3.1.3. Print number of packets parsed
-            # 3.1.3.1. Print the file for demonstration purposes
+            # Print number of packets parsed
+            # Print the file for demonstration purposes
             if pcapFile.__len__() > 0:
                 if pcapFile.__len__() + "Parsing file: ".__len__() > printWid:
                     stdscr.addnstr(printLen - 2, 2, "Parsing file: " 
                                    + os.path.basename(pcapFile), printWid)
                 else:
                     stdscr.addnstr(printLen - 2, 2, "Parsing file: " + pcapFile, printWid)
-            # 3.1.3.2. Tell the user how to exit
+            # Tell the user how to exit
             stdscr.addnstr(printLen - 1, 2, "Press [Enter] to stop parsing and [Enter] again to exit", printWid)
-            # 3.1.3.3. Print the number of packets processed
+            # Print the number of packets processed
             if 1 == numPackets:
                 stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packet", printWid)
             elif numPackets > 1:                
                 stdscr.addnstr(printLen, 2, "Processed " + str(numPackets) + " packets", printWid)
 
-            # 3.2. Refresh the window
+            # 3.2.2. Refresh the window
             stdscr.refresh()
 
-            # N. Stop parsing on user input
+            # 3.2.3. Stop parsing on user input
             if -1 != stdscr.getch():
                 break
 
@@ -392,3 +473,12 @@ if __name__ == "__main__":
             if -1 != stdscr.getch():
                 break
         break_a_curse(stdscr)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as err:
+        print(repr(err))
+    else:
+        print("Done.")
