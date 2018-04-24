@@ -383,7 +383,7 @@ def main():
                 if pcapFile.__len__() > 0:
                     peekABoo = peek_into_generator(fCapture)
                 elif interName.__len__() > 0:
-                    peekABoo = peek_into_generator(lCapture)
+                    peekABoo = peek_into_generator(lCapture.sniff_continuously())
                 else:
                     raise RuntimeError("Dynamic generator logic failed")
 
@@ -391,9 +391,9 @@ def main():
                 if isinstance(peekABoo, tuple) and peekABoo.__len__() == 2:
                     # Found a packet!
                     if pcapFile.__len__() > 0:
-                        packetGen = peekABoo[1].__iter__
+                        packetGen = peekABoo[1]
                     elif interName.__len__() > 0:
-                        packetGen = peekABoo[1].sniff_continuously
+                        packetGen = peekABoo[1]
                     else:
                         raise RuntimeError("Dynamic generator logic failed")
                     stdscr.clear()  # Clear the screen
@@ -401,7 +401,7 @@ def main():
                     break
         
         # 3. ITERATE THROUGH THE PACKETS THE GENERATOR HAS TO OFFER
-        for packet in packetGen():
+        for packet in packetGen:
             # 3.1. PARSE PACKETS
             # Keep track of packet number
             numPackets += 1
