@@ -315,6 +315,10 @@ if __name__ == "__main__":
                 raise err
         else:
             raise RuntimeError("Dynamic generator logic failed")
+
+        # Prepare the user for no input
+        stdscr.addnstr(2, 2, "Waiting for packets...", printWid)
+        stdscr.refresh()
         
         for packet in packetGen():
             # 2. PARSE PACKETS
