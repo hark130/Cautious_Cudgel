@@ -4,6 +4,12 @@ from sys import exit
 import curses
 import os
 import pyshark
+import signal
+import sys
+
+
+# GLOBAL VARIABLES
+stdscr = None  # Global variable for the signal handler to clear
 
 
 ##############################################################################
@@ -41,6 +47,7 @@ def parse_arguments():
 ####################### PYSHARK HELPER FUNCTIONS START #######################
 ##############################################################################
 
+
 def peek_into_generator(dynamo):
     '''
         PURPOSE - Determine if a 'generator' has anything to give in order
@@ -73,6 +80,41 @@ def peek_into_generator(dynamo):
 
     ### DONE ###
     return retVal
+
+
+def signal_handler(signal, frame):
+    '''
+        PURPOSE - Expressly written to handle KeyboardInterrupts in as
+            silent a way as possible
+        INPUT - Standard signal handler input
+        OUTPUT - None
+        NOTES
+            'Tears down' the curses window on its way out
+    '''
+    try:
+        if stdscr:
+            break_a_curse(stdscr)
+            stdscr = None
+    except Exception:
+        pass  # We're on the way out anyway
+    finally:
+        sys.exit(0)
+        # raise SystemExit("Received interrupt signal.  Exiting.")
+
+
+def exception_handler(exception_type, exception, traceback):
+    '''
+        PURPOSE - A silent exception handler.  pyshark is very 'barky' during
+            exceptions.
+        INPUT - Standard exception information
+        OUTPUT - Nothing
+        NOTES
+            'Quiet, you!' - Mr. Peabody
+    '''
+    if stdscr:
+        break_a_curse(stdscr)
+        stdscr = None
+    return
 
 
 ##############################################################################
@@ -123,11 +165,15 @@ def break_a_curse(cWin):
     ### LOCAL VARIABLES ###
     retVal = True  # Make this False if anyting fails
 
+    ### CLEAR THE WINDOW ###
+    if cWin:
+        cWin.clear()
+
     ### TERMIANTE A WINDOW ###
     # 1. Turn off cbreak
     curses.nocbreak()
     # 2. Restore echo
-    curses.noecho()
+    curses.echo()
     # 3. Restore the terminal
     curses.endwin()
 
@@ -301,13 +347,20 @@ def main():
     printWid = 0  # Maximum printable area of the curses window
     printLen = 0  # Maximum printable area of the curses window
     numPackets = 0  # Keep track of the number of packets
-    # Wireshark display filter for specific "service request numbers"
-    # cipDispFilter = ""
-    cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+    # Wireshark preference to avoid 'ignoring' replayed(?)/dupe(?) packets
     overPrefs = { 'tcp.analyze_sequence_numbers' : 'FALSE'}
     peekABoo = None  # Temp return value for peek_into_generator() calls
     packetGen = None  # Generator variable determined by parameters
     captureObj = None  # Capture object
+    # Wireshark display filter for specific "service request numbers"
+    # cipDispFilter = ""
+    cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
+
+    ### SILENCE PYSHARK ###
+    sys.excepthook = exception_handler  # Hijack the exception handler
+    sys.tracebacklimit = 0  # Maximum suppression of traceback information
+    # Install a signal handler for keyboard interrupts
+    signal.signal(signal.SIGINT, signal_handler)
 
     ### PARSE ARGS ###
     args = parse_arguments() # Parsed arguments
@@ -330,10 +383,14 @@ def main():
         maxWid, maxLen = get_curse_dimensions(stdscr)
 
         if maxWid < 1 or maxLen < 1:
-            break_a_curse(stdscr)
+            if stdscr:
+                break_a_curse(stdscr)
+                stdscr = None
             raise RuntimeError("get_curse_dimensions appears to have failed")
         elif maxWid < (29 + 4) or maxLen < (13 + 4):
-            break_a_curse(stdscr)
+            if stdscr:
+                break_a_curse(stdscr)
+                stdscr = None
             raise RuntimeError("Terminal window is too small")
         else:
             printWid = maxWid - 4
@@ -350,7 +407,9 @@ def main():
                 # packetGen = captureObj.__iter__
                 packetGen = captureObj
             except Exception as err:
-                break_a_curse(stdscr)
+                if stdscr:
+                    break_a_curse(stdscr)
+                    stdscr = None
                 raise err
         elif interName.__len__() > 0:
             try:
@@ -362,7 +421,9 @@ def main():
                 # packetGen = captureObj.sniff_continuously
                 packetGen = captureObj.sniff_continuously()
             except Exception as err:
-                break_a_curse(stdscr)
+                if stdscr:
+                    break_a_curse(stdscr)
+                    stdscr = None
                 raise err
         else:
             raise RuntimeError("Dynamic generator logic failed")
@@ -371,33 +432,32 @@ def main():
         # Prepare the user for no input
         while (1):
             stdscr.addnstr(2, 2, "Waiting for packets...", printWid)
-            stdscr.addnstr(3, 2, "Press [Enter] to stop waiting.", printWid)
+            if pcapFile.__len__() > 0:
+                stdscr.addnstr(3, 2, "Press [Enter] to stop waiting.", printWid)
+            else:
+                stdscr.addnstr(3, 2, "CACU will not allow input while waiting.", printWid)
+                stdscr.addnstr(4, 2, "Ctrl-C to exit prior to reading packets.", printWid)
+                # stdscr.addnstr(5, 2, "Then type 'reset' and hit Enter.", printWid)
             stdscr.refresh()
 
             # Give the user a chance to stop waiting for packets
             if -1 != stdscr.getch():
                 try:
-                    break_a_curse(stdscr)
+                    if stdscr:
+                        break_a_curse(stdscr)
+                        stdscr = None
                     captureObj.close()
                 except Exception as err:
                     print(repr(err))  # DEBUGGING
                     pass  # Ignore all Exceptions... pyshark gets 'barky'
                 finally:
-                    # exit(0)
-                    raise SystemExit("User does not want to wait any longer.")
+                    exit(0)
+                    # raise SystemExit("User does not want to wait any longer.")
             # Check for packets
-            else:
-                # if pcapFile.__len__() > 0:
-                #     peekABoo = peek_into_generator(fCapture)
-                # elif interName.__len__() > 0:
-                #     peekABoo = peek_into_generator(lCapture.sniff_continuously())
-                if packetGen is not None and pcapFile.__len__() > 0:
+            else:                
+                if packetGen is not None:
+                # if packetGen is not None and pcapFile.__len__() > 0:
                     peekABoo = peek_into_generator(packetGen)
-                    # stdscr.refresh()
-                    # stdscr.addnstr(4, 2, "HERE!", printWid)
-                # else:
-                #     break_a_curse(stdscr)
-                #     raise RuntimeError("Dynamic generator logic failed")
 
                 # Found a packet?
                 if isinstance(peekABoo, tuple) and peekABoo.__len__() == 2:
@@ -472,20 +532,27 @@ def main():
             stdscr.refresh()
 
             # 3.2.3. Stop parsing on user input
-            if -1 != stdscr.getch():
+            if -1 != stdscr.getch():            
+                stdscr.addnstr(printLen - 1, 2, "Stopped parsing.  Press [Enter] again to exit.         ", printWid)
+                stdscr.refresh()
                 break
 
         ### BREAK THE CURSE ###
         while True:
             if -1 != stdscr.getch():
                 break
-        break_a_curse(stdscr)
+        if stdscr:
+            break_a_curse(stdscr)
+            stdscr = None
 
 
 if __name__ == "__main__":
     try:
         main()
+    except KeyboardInterrupt:
+        pass
     except Exception as err:
-        print(repr(err))
+        # print(repr(err))
+        pass
     else:
         print("Done.")
