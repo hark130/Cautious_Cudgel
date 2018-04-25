@@ -306,6 +306,8 @@ def main():
     cipDispFilter = "cip.service == 0x4d || cip.service == 0x4e"
     overPrefs = { 'tcp.analyze_sequence_numbers' : 'FALSE'}
     peekABoo = None  # Temp return value for peek_into_generator() calls
+    packetGen = None  # Generator variable determined by parameters
+    captureObj = None  # Capture object
 
     ### PARSE ARGS ###
     args = parse_arguments() # Parsed arguments
@@ -341,22 +343,24 @@ def main():
         if pcapFile.__len__() > 0:
             try:
                 if cipDispFilter.__len__() > 0:
-                    fCapture = pyshark.FileCapture(pcapFile, override_prefs = overPrefs, display_filter = cipDispFilter)
+                    captureObj = pyshark.FileCapture(pcapFile, override_prefs = overPrefs, display_filter = cipDispFilter)
                 else:
-                    fCapture = pyshark.FileCapture(pcapFile, override_prefs = overPrefs)
+                    captureObj = pyshark.FileCapture(pcapFile, override_prefs = overPrefs)
                             
-                # packetGen = fCapture.__iter__
+                # packetGen = captureObj.__iter__
+                packetGen = captureObj
             except Exception as err:
                 break_a_curse(stdscr)
                 raise err
         elif interName.__len__() > 0:
             try:
                 if cipDispFilter.__len__() > 0:
-                    lCapture = pyshark.LiveCapture(interName, override_prefs = overPrefs, display_filter = cipDispFilter)
+                    captureObj = pyshark.LiveCapture(interName, override_prefs = overPrefs, display_filter = cipDispFilter)
                 else:
-                    lCapture = pyshark.LiveCapture(interName, override_prefs = overPrefs)
+                    captureObj = pyshark.LiveCapture(interName, override_prefs = overPrefs)
                             
-                # packetGen = lCapture.sniff_continuously
+                # packetGen = captureObj.sniff_continuously
+                packetGen = captureObj.sniff_continuously()
             except Exception as err:
                 break_a_curse(stdscr)
                 raise err
@@ -374,29 +378,31 @@ def main():
             if -1 != stdscr.getch():
                 try:
                     break_a_curse(stdscr)
+                    captureObj.close()
                 except Exception as err:
+                    print(repr(err))  # DEBUGGING
                     pass  # Ignore all Exceptions... pyshark gets 'barky'
                 finally:
                     # exit(0)
-                    raise SystemExit("User does not want to wait any longer")
+                    raise SystemExit("User does not want to wait any longer.")
             # Check for packets
             else:
-                if pcapFile.__len__() > 0:
-                    peekABoo = peek_into_generator(fCapture)
-                elif interName.__len__() > 0:
-                    peekABoo = peek_into_generator(lCapture.sniff_continuously())
-                else:
-                    raise RuntimeError("Dynamic generator logic failed")
+                # if pcapFile.__len__() > 0:
+                #     peekABoo = peek_into_generator(fCapture)
+                # elif interName.__len__() > 0:
+                #     peekABoo = peek_into_generator(lCapture.sniff_continuously())
+                if packetGen is not None and pcapFile.__len__() > 0:
+                    peekABoo = peek_into_generator(packetGen)
+                    # stdscr.refresh()
+                    # stdscr.addnstr(4, 2, "HERE!", printWid)
+                # else:
+                #     break_a_curse(stdscr)
+                #     raise RuntimeError("Dynamic generator logic failed")
 
                 # Found a packet?
                 if isinstance(peekABoo, tuple) and peekABoo.__len__() == 2:
                     # Found a packet!
-                    if pcapFile.__len__() > 0:
-                        packetGen = peekABoo[1]
-                    elif interName.__len__() > 0:
-                        packetGen = peekABoo[1]
-                    else:
-                        raise RuntimeError("Dynamic generator logic failed")
+                    packetGen = peekABoo[1]
                     stdscr.clear()  # Clear the screen
                     stdscr.refresh()  # Update the screen
                     break
